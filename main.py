@@ -27,10 +27,14 @@ submit_button.click()
 accounts_button = driver.find_elements(by=By.CSS_SELECTOR, value="td-wb-menu-item")[1]
 accounts_button.click()
 
-holdings_button = driver.find_element(by=By.CSS_SELECTOR, value='[href="#/page/account/holdings"]')
+holdings_button = driver.find_element(
+    by=By.CSS_SELECTOR, value='[href="#/page/account/holdings"]'
+)
 holdings_button.click()
 
-export_button = driver.find_element(by=By.CSS_SELECTOR, value="td-wb-toolbar-item-export")
+export_button = driver.find_element(
+    by=By.CSS_SELECTOR, value="td-wb-toolbar-item-export"
+)
 export_button.click()
 
 csv_button = driver.find_element(by=By.ID, value="td-wb-toolbar-item-export-CSV")
