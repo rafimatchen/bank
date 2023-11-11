@@ -1,13 +1,15 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-import tomllib
 
-with open("config.toml", "rb") as f:
-    config = tomllib.load(f)
+import config
+
+URL = "https://wb.authentication.td.com/uap-ui/?consumer=webbroker&locale=en_CA#/uap/login"
+
+config = config.get_config()
 
 driver = webdriver.Chrome()
 
-driver.get(config["url"])
+driver.get(URL)
 
 title = driver.title
 
