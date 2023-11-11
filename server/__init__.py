@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, redirect, request, url_for
+from flask import Flask, request
 
 from .db import get_db
 

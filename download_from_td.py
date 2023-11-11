@@ -1,46 +1,54 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
-import config
+import config_loader
 
-URL = "https://wb.authentication.td.com/uap-ui/?consumer=webbroker&locale=en_CA#/uap/login"
 
-config = config.get_config()
+def main():
+    URL = "https://wb.authentication.td.com/uap-ui/?consumer=webbroker&locale=en_CA#/uap/login"
 
-driver = webdriver.Chrome()
+    config = config_loader.get_config()
 
-driver.get(URL)
-driver.maximize_window()
+    driver = webdriver.Chrome()
 
-title = driver.title
+    driver.get(URL)
+    driver.maximize_window()
 
-driver.implicitly_wait(5)
+    driver.implicitly_wait(5)
 
-username_input = driver.find_element(by=By.ID, value="username")
-password_input = driver.find_element(by=By.ID, value="uapPassword")
+    username_input = driver.find_element(by=By.ID, value="username")
+    password_input = driver.find_element(by=By.ID, value="uapPassword")
 
-submit_button = driver.find_element(
-    by=By.CSS_SELECTOR, value="button.btn.btn-block.td-button-secondary"
-)
+    submit_button = driver.find_element(
+        by=By.CSS_SELECTOR, value="button.btn.btn-block.td-button-secondary"
+    )
 
-username_input.send_keys(config["td_login"])
-password_input.send_keys(config["td_password"])
-submit_button.click()
+    username_input.send_keys(config["td_login"])
+    password_input.send_keys(config["td_password"])
+    submit_button.click()
 
-accounts_button = driver.find_elements(by=By.CSS_SELECTOR, value="td-wb-menu-item")[1]
-accounts_button.click()
+    accounts_button = driver.find_elements(by=By.CSS_SELECTOR, value="td-wb-menu-item")[
+        1
+    ]
+    accounts_button.click()
 
-holdings_button = driver.find_element(
-    by=By.CSS_SELECTOR, value='[href="#/page/account/holdings"]'
-)
-holdings_button.click()
+    holdings_button = driver.find_element(
+        by=By.CSS_SELECTOR, value='[href="#/page/account/holdings"]'
+    )
+    holdings_button.click()
 
-export_button = driver.find_element(
-    by=By.CSS_SELECTOR, value="td-wb-toolbar-item-export"
-)
-export_button.click()
+    export_button = driver.find_element(
+        by=By.CSS_SELECTOR, value="td-wb-toolbar-item-export"
+    )
+    export_button.click()
 
-csv_button = driver.find_element(by=By.ID, value="td-wb-toolbar-item-export-CSV")
-csv_button.click()
+    csv_button = driver.find_element(by=By.ID, value="td-wb-toolbar-item-export-CSV")
+    csv_button.click()
 
-input()
+
+if __name__ == "__main__":
+    try:
+        main()
+    except:
+        input()
+    input()

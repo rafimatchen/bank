@@ -1,8 +1,8 @@
 import pyotp
 
-import config
+import config_loader
 
-config = config.get_config()
+config = config_loader.get_config()
 
 totp = pyotp.TOTP(config["otp_secret"])
 
