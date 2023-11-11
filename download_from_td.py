@@ -10,6 +10,7 @@ config = config.get_config()
 driver = webdriver.Chrome()
 
 driver.get(URL)
+driver.maximize_window()
 
 title = driver.title
 
@@ -22,8 +23,8 @@ submit_button = driver.find_element(
     by=By.CSS_SELECTOR, value="button.btn.btn-block.td-button-secondary"
 )
 
-username_input.send_keys(config["login"])
-password_input.send_keys(config["password"])
+username_input.send_keys(config["td_login"])
+password_input.send_keys(config["td_password"])
 submit_button.click()
 
 accounts_button = driver.find_elements(by=By.CSS_SELECTOR, value="td-wb-menu-item")[1]
