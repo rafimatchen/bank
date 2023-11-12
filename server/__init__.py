@@ -37,15 +37,24 @@ def create_app(test_config=None):
         write_code_to_db(code)
         return "200"
 
-    def write_code_to_db(code: str):
-        if not code.isnumeric():
-            raise ValueError(f"Code {code}\n is non-numeric.")
+    @app.get("/mostrecentcode")
+    def get_most_recent_td_code():
         db = get_db()
-
-        db.execute("INSERT INTO security_code (code) VALUES (?)", (code,))
-        db.commit()
+        code = db.execute(
+            "SELECT * FROM security_code ORDER BY created DESC"
+        ).fetchone()
+        return {"code": code}
 
     from . import db
 
     db.init_app(app)
     return app
+
+
+def write_code_to_db(code: str):
+    if not code.isnumeric():
+        raise ValueError(f"Code {code}\n is non-numeric.")
+    db = get_db()
+
+    db.execute("INSERT INTO security_code (code) VALUES (?)", (code,))
+    db.commit()

@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 
 import config_loader
@@ -26,6 +27,14 @@ def main():
     username_input.send_keys(config["td_login"])
     password_input.send_keys(config["td_password"])
     submit_button.click()
+    try:
+        text_me_button = driver.find_element(
+            by=By.XPATH, value="//button[normalize-space()='Text me']"
+        )
+    except NoSuchElementException:
+        pass
+    else:
+        text_me_button.click()
 
     accounts_button = driver.find_elements(by=By.CSS_SELECTOR, value="td-wb-menu-item")[
         1
@@ -47,8 +56,5 @@ def main():
 
 
 if __name__ == "__main__":
-    try:
-        main()
-    except:
-        input()
+    main()
     input()
